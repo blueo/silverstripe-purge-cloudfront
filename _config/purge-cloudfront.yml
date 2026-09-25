@@ -1,0 +1,16 @@
+---
+Name: blueo-purge-cloudfront
+After:
+  - '#blueo-purge'
+Only:
+  envvarset: 'PURGE_CLOUDFRONT_DISTRIBUTION_ID'
+---
+SilverStripe\Core\Injector\Injector:
+  Blueo\Purge\Service\PurgeAdaptor:
+    class: Blueo\Purge\CloudFront\Service\CloudFrontPurgeAdaptor
+  Aws\CloudFront\CloudFrontClient.purgeClient:
+    factory: Blueo\Purge\CloudFront\Service\ClientFactory
+    constructor:
+      # No credentials. The SDK reads the Fargate task role through its
+      # default provider chain. The role needs cloudfront:CreateInvalidation.
+      region: '`PURGE_CLOUDFRONT_REGION`'

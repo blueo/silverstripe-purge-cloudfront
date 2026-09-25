@@ -1,0 +1,8 @@
+/vendor/
+/public/
+/composer.lock
+/.phpunit.result.cache
+/coverage/
+/assets/
+/silverstripe-cache/
+.DS_Store

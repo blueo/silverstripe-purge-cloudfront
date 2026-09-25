@@ -1,0 +1,49 @@
+{
+    "name": "blueo/silverstripe-purge-cloudfront",
+    "description": "Amazon CloudFront provider for blueo/silverstripe-purge",
+    "type": "silverstripe-vendormodule",
+    "keywords": [
+        "silverstripe",
+        "cloudfront",
+        "aws",
+        "cache",
+        "purge",
+        "invalidation",
+        "cdn"
+    ],
+    "license": "BSD-3-Clause",
+    "require": {
+        "php": "^8.3",
+        "aws/aws-sdk-php": "^3.300",
+        "blueo/silverstripe-purge": "^1.0",
+        "silverstripe/framework": "^6"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.3",
+        "silverstripe/sqlite3": "^4"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/blueo/silverstripe-purge.git"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Blueo\\Purge\\CloudFront\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Blueo\\Purge\\CloudFront\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true,
+            "silverstripe/vendor-plugin": true
+        }
+    }
+}
