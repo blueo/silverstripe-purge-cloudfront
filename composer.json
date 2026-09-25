@@ -22,12 +22,6 @@
         "phpunit/phpunit": "^11.3",
         "silverstripe/sqlite3": "^4"
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/blueo/silverstripe-purge.git"
-        }
-    ],
     "autoload": {
         "psr-4": {
             "Blueo\\Purge\\CloudFront\\": "src/"

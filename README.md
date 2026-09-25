@@ -28,16 +28,6 @@ sake dev/build flush=1
 sake tasks:blueo-purge --capabilities
 ```
 
-Neither this package nor the core module is on Packagist, so the site needs
-the repositories as well:
-
-```json
-"repositories": [
-    {"type": "vcs", "url": "https://github.com/blueo/silverstripe-purge.git"},
-    {"type": "vcs", "url": "https://github.com/blueo/silverstripe-purge-cloudfront.git"}
-]
-```
-
 The last line prints the bound provider and what it supports. Run it on each
 environment after a deployment.
 
