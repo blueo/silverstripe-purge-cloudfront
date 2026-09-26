@@ -44,6 +44,27 @@ set, this module binds nothing, the core module's `NullPurgeAdaptor` stays in
 place, and a purge call throws and names the missing configuration. Installing
 the module on a branch environment with no distribution changes nothing.
 
+### If the variable is set and the provider still does not bind
+
+A gate is tested once, when the config manifest is built, and the answer is
+stored in the manifest. It is not re-tested per request. So a manifest built
+while the variable was absent keeps `NullPurgeAdaptor` however the environment
+looks afterwards, and the symptom is a site that publishes pages and
+invalidates nothing, with one line in the log and nothing on the page.
+
+Flushing the manifest fixes it. The case to watch for is a container image that
+bakes the manifest at build time, which is a sensible thing to do for a cold
+start and means the gate is answered inside `docker build`, where a
+per-environment value does not exist. Set a placeholder for the bake:
+
+```dockerfile
+PURGE_CLOUDFRONT_DISTRIBUTION_ID=bake frankenphp run ...
+```
+
+The gate then records true and the adaptor binds; the real id is read from the
+environment at call time, not from the manifest, so the placeholder never
+reaches AWS.
+
 ## Credentials and IAM
 
 Credentials are not read from config and are not passed to the SDK. The AWS
